@@ -160,6 +160,9 @@ class GMockOutputTest(gmock_test_utils.TestCase):
     golden = golden_file.read().decode('utf-8')
     golden_file.close()
 
+    # Work around https://bugs.python.org/issue40863
+    golden = ToUnixLineEnding(golden)
+
     # The normalized output should match the golden file.
     self.assertEquals(golden, output)
 
